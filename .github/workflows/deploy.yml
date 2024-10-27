@@ -1,5 +1,9 @@
 name: Deploy to GitHub Pages
 
+permissions:
+  id-token: write
+  pages: write
+  
 on:
   workflow_dispatch:  # Allows triggering from the submodule
   repository_dispatch:  # Also allows manual dispatch from API
