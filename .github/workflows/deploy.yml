@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:  # Allows triggering from the submodule
+  repository_dispatch:  # Also allows manual dispatch from API
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true  # Update submodules
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update submodule
+        run: git submodule update --remote --merge
+
+      - name: Build the project
+        run: npx quartz build
+
+      - name: Deploy GitHub Pages site
+        uses: actions/deploy-pages@v4.0.5
