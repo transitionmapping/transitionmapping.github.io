@@ -23,7 +23,10 @@ jobs:
         run: npm install
 
       - name: Update submodule
-        run: git submodule update --remote --merge
+        run: |
+          git submodule update --remote --force
+          git checkout --force content  # Replace 'content' with your submodule path if different
+
 
       - name: Build the project
         run: npx quartz build
