@@ -33,3 +33,7 @@ jobs:
 
       - name: Deploy GitHub Pages site
         uses: actions/deploy-pages@v4.0.5
+        with:
+          token: ${{ secret.TOKEN }}
+          
+        
